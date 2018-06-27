@@ -6,10 +6,12 @@ import java.util.regex.*;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,17 +40,14 @@ public class SeleniumTest {
 
     @Before
     public void setup() throws MalformedURLException {
-    System.out.println(System.getProperty("user.dir"));    
+
     	System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/lib/drivers/chromedriver");
         ChromeOptions chromeOptions = new ChromeOptions();
-
-        DesiredCapabilities caps = DesiredCapabilities.chrome();
-	    caps.setCapability("platform", "Mac");
-	    //caps.setCapability("version", "43.0");
-
-	    driver = new RemoteWebDriver(new java.net.URL(URL), caps);
-        
+        chromeOptions.setCapability(CapabilityType.PLATFORM_NAME, Platform.MAC);
+ 
         //driver = new ChromeDriver(chromeOptions);
+        driver = new RemoteWebDriver(new java.net.URL(URL), chromeOptions);
+        
         wait = new WebDriverWait(driver, 20);
         driver.setFileDetector(new LocalFileDetector());
 
