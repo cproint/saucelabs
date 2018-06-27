@@ -11,13 +11,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class SeleniumTest {
-	WebDriver driver;
+	RemoteWebDriver driver;
 	WebDriverWait wait;
 	WebElement signinButton;
 	WebElement newAddressLink;
@@ -39,7 +40,7 @@ public class SeleniumTest {
     public void setup() throws MalformedURLException {
     System.out.println(System.getProperty("user.dir"));    
     	System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/lib/drivers/chromedriver");
-        //ChromeOptions chromeOptions = new ChromeOptions();
+        ChromeOptions chromeOptions = new ChromeOptions();
 
         DesiredCapabilities caps = DesiredCapabilities.chrome();
 	    caps.setCapability("platform", "Mac");
@@ -49,6 +50,7 @@ public class SeleniumTest {
         
         //driver = new ChromeDriver(chromeOptions);
         wait = new WebDriverWait(driver, 20);
+        driver.setFileDetector(new LocalFileDetector());
 
     }
     
